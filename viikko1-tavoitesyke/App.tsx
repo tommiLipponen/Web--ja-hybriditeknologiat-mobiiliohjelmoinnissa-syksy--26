@@ -16,16 +16,18 @@ export default function App() {
   return (
     <View style={styles.container}>
       {/* Otsikkoteksti näytön yläosassa */}
-      <Text style={styles.heading}>Tavoitesyke</Text>
+      <Text style={styles.heading}>Heart Rate Limits Calculator</Text>
+      {/* Kenttää kuvaava teksti syötekentän yläpuolella */}
+      <Text style={styles.label}>Enter your age:</Text>
       <TextInput
-        placeholder="Ikä" // Kenttä sisällä näkyvä teksti ennen kuin käyttäjä kirjoittaa jotain
+        style={styles.input} // Antaa syötekentälle reunaviivan ja sisäisen tilan
         keyboardType="number-pad" // Näyttää numeerisen näppäimistön puhelimessa/emulaattorissa
         value={age} // Kentän sisältöä ohjaa age-tilamuuttuja
         onChangeText={setAge} // Päivittää age-tilamuuttujan aina kun käyttäjä kirjoittaa
       />
-      {/* Näyttää lasketun sykealueen, pyöristettynä kokonaisluvuiksi */}
-      <Text style={styles.text}>Alaraja: {lower.toFixed(0)}</Text>
-      <Text style={styles.text}>Yläraja: {upper.toFixed(0)}</Text>
+      {/* Näyttää lasketun sykealueen, pyöristettynä kahteen desimaaliin */}
+      <Text style={styles.text}>Lower limit: {lower.toFixed(2)} bpm</Text>
+      <Text style={styles.text}>Upper limit: {upper.toFixed(2)} bpm</Text>
     </View>
   );
 }
@@ -37,11 +39,23 @@ const styles = StyleSheet.create({
     margin: 16 // Marginaali koko näkymän ympärillä
   },
   heading: {
-    fontSize: 24, // Suurempi fonttikoko otsikolle
+    fontSize: 22, // Suurempi fonttikoko otsikolle
+    fontWeight: "bold", // Lihavoitu otsikkoteksti
     marginTop: 32, // Tila otsikon yläpuolella
-    marginBottom: 16 // Tila otsikon alapuolella
+    marginBottom: 24 // Tila otsikon alapuolella
+  },
+  label: {
+    fontSize: 14, // Pienempi fonttikoko kenttää kuvaavalle tekstille
+    marginBottom: 4 // Pieni tila tekstin ja syötekentän välissä
+  },
+  input: {
+    borderWidth: 1, // Näkyvä reunaviiva syötekentän ympärillä
+    borderColor: "#999", // Reunaviivan väri
+    borderRadius: 4, // Hieman pyöristetyt kulmat
+    padding: 8, // Sisäinen tila tekstin ympärillä
+    width: 120 // Kentän leveys
   },
   text: {
-    marginVertical: 16 // Tila tulostekstin ylä- ja alapuolella
+    marginTop: 16 // Tila tulostekstien yläpuolella
   }
 });
