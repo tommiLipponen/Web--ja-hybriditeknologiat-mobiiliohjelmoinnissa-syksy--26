@@ -1,6 +1,7 @@
 import { Pressable, StyleSheet, Text } from "react-native";
 import { Task } from "../types";
 
+// Yksi rivi saa näytettävän tehtävän ja painalluksen käsittelijän
 type TaskRowProps = {
   task: Task;
   onPress: () => void;

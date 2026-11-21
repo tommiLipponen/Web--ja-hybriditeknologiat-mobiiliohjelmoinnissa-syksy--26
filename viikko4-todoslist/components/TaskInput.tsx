@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 
+// Pääkomponentilta saadaan funktio tehtävän lisäämistä varten
 type TaskInputProps = {
   onAddTask: (text: string) => void;
 };
@@ -17,7 +18,9 @@ export default function TaskInput({ onAddTask }: TaskInputProps) {
       return;
     }
 
+    // Pääkomponentti lisää tehtävän sovelluksen tila-taulukkoon
     onAddTask(trimmedText);
+    // Tekstikenttä tyhjennetään tallennuksen jälkeen
     setText("");
   }
 
@@ -26,6 +29,7 @@ export default function TaskInput({ onAddTask }: TaskInputProps) {
       <TextInput
         style={styles.input}
         placeholder="Task"
+        // value ja onChangeText pitävät kentän Reactin tilassa
         value={text}
         onChangeText={setText}
         onSubmitEditing={saveTask}

@@ -6,6 +6,7 @@ import TaskInput from "./components/TaskInput";
 import TaskList from "./components/TaskList";
 import { Task } from "./types";
 
+// Sama avain hakee aina tämän sovelluksen tallennetut tehtävät
 const STORAGE_KEY = "todo-tasks";
 
 export default function App() {
@@ -20,6 +21,7 @@ export default function App() {
         const savedTasks = await AsyncStorage.getItem(STORAGE_KEY);
 
         if (savedTasks !== null) {
+          // Merkkijono muutetaan takaisin tehtävätaulukoksi
           setTasks(JSON.parse(savedTasks));
         }
       } catch {
@@ -34,12 +36,14 @@ export default function App() {
 
   // Tallennetaan tehtävälista puhelimen muistiin aina sen muuttuessa
   useEffect(() => {
+    // Ei korvata tallennettuja tehtäviä ennen niiden lataamista
     if (!isLoaded) {
       return;
     }
 
     async function saveTasks() {
       try {
+        // AsyncStorage tallentaa tiedot merkkijonona
         await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
       } catch {
         Alert.alert("Error", "Could not save tasks.");
@@ -64,6 +68,7 @@ export default function App() {
   function toggleTask(id: string) {
     setTasks((currentTasks) =>
       currentTasks.map((task) =>
+        // Muut tehtävät palautetaan sellaisina kuin ne olivat
         task.id === id ? { ...task, done: !task.done } : task
       )
     );
@@ -75,6 +80,7 @@ export default function App() {
       <View style={styles.header}>
         <Text style={styles.title}>Todo list</Text>
       </View>
+      {/* Komponenteille välitetään tilan käsittelyfunktiot propseina */}
       <TaskInput onAddTask={addTask} />
       <TaskList tasks={tasks} onToggleTask={toggleTask} />
     </SafeAreaView>
